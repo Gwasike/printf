@@ -1,5 +1,12 @@
 #include "main.h"
 
+/**
+ * print_Str5 - prints a string
+ * @val: the argument
+ *
+ * Return: Always 0
+ */
+
 int print_Str5(va_list val)
 {
 char *i;
@@ -25,5 +32,11 @@ length++;
 }
 length = length + printXX(value);
 }
+else
+{
+_putchar(i[j]);
+length++;
 }
+}
+return (length);
 }

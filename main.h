@@ -18,5 +18,9 @@ int unsigned_int(va_list args);
 int octal_prt(va_list val);
 int print_x(va_list val);
 int print_X(va_list val);
+int printXX(unsigned int num);
+int print_Str5(va_list val);
+int print_hex(unsigned long int num);
+int pointer_prt(va_list val);
 
 #endif
