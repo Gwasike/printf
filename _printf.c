@@ -2,59 +2,63 @@
 
 /**
  * _printf - prints the format
- * @format: the argument
+ * @format: the format string
  *
  * Return: Always 0
  */
 
 int _printf(const char *format, ...)
 {
-int prin_chr = 0;
+int print_char = 0;
 va_list args_list;
 
-if (*format == NULL)
+if (format == NULL)
 {
-return (1);
-}
+return (-1);
+
 va_start(args_list, format);
 
 while (*format)
 {
-if (*format != %)
+if (*format != '%')
 {
 write(1, format, 1);
-prin_chr++;
+print_char++;
 }
 else
 {
 format++;
-if (*format != '\0')
+if (*format == '\0')
 {
 break;
-}
 if (*format == '%')
 {
 write(1, format, 1);
-prin_chr++;
+print_char++;
 }
 else if (*format == 'c')
 {
 char c = va_arg(args_list, int);
-write(1, &c, 1);
-prin_chr++;
+write(1, &c, 1)
+print_char++;
 }
 else if (*format == 's')
 {
 char *str = va_arg(args_list, char*);
-int str_len = 0;
-while (str[str_len] != '\0')
+int str_length = 0;
+
+while (str[str_length] != '\0')
 {
-str_len++;
+str_length++;
 }
-write(1, str, str_len);
-prin_chr += str_len;
+write(1, str, str_length);
+print_char += str_length;
 }
+}
+}
+format++;
 }
 
-}
+va_end(args_list);
+return (print_char);
 }
