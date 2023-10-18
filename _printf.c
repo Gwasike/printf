@@ -1,66 +1,68 @@
 #include "main.h"
 
 /**
- * _printf - prints the format
- * @format: the format string
+ * _printf - Print formatted text to standard output
+ * @format: String containS format specifiers.
  *
- * Return: Always 0
+ * Return: The number of characters printed
  */
 
 int _printf(const char *format, ...)
 {
-int print_char = 0;
-va_list args_list;
+int count = 0;
+va_list args;
 
-if (format == NULL)
-{
-return (-1);
+va_start(args, format);
 
-va_start(args_list, format);
-
-while (*format)
+while (format && *format)
 {
-if (*format != '%')
-{
-write(1, format, 1);
-print_char++;
-}
-else
-{
-format++;
-if (*format == '\0')
-{
-break;
 if (*format == '%')
 {
-write(1, format, 1);
-print_char++;
-}
-else if (*format == 'c')
+format++;
+if (*format == '\0') // In case of a '%' at the end of the string
 {
-char c = va_arg(args_list, int);
-write(1, &c, 1);
-print_char++;
+break;
+}
+if (*format == 'c')
+{
+char c = va_arg(args, int);
+_putchar(c);
+count++;
 }
 else if (*format == 's')
 {
-char *str = va_arg(args_list, char*);
-int str_length = 0;
-
-while (str[str_length] != '\0')
+char *str = va_arg(args, char *);
+if (str == NULL)
 {
-str_length++;
+str = "(null)";
 }
-write(1, str, str_length);
-print_char += str_length;
+while (*str)
+{
+_putchar(*str);
+str++;
+count++;
 }
 }
+else if (*format == '%')
+{
+_putchar('%');
+count++;
+}
+else
+{
+_putchar('%');
+_putchar(*format);
+count += 2;
+}
+}
+else
+{
+_putchar(*format);
+count++;
 }
 format++;
 }
 
-va_end(args_list);
-return (print_char);
-}
-return (print_char);
+va_end(args);
+return count;
 }
