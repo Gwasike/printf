@@ -1,4 +1,5 @@
 #include "main.h"
+#include <unistd.h>
 
 /**
  * _printf - Print formatted text to standard output
@@ -19,7 +20,7 @@ while (format && *format)
 if (*format == '%')
 {
 format++;
-if (*format == '\0') // In case of a '%' at the end of the string
+if (*format == '\0')
 {
 break;
 }
