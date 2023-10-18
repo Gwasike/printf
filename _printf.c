@@ -39,7 +39,7 @@ print_char++;
 else if (*format == 'c')
 {
 char c = va_arg(args_list, int);
-write(1, &c, 1)
+write(1, &c, 1);
 print_char++;
 }
 else if (*format == 's')
@@ -60,5 +60,7 @@ format++;
 }
 
 va_end(args_list);
+return (print_char);
+}
 return (print_char);
 }
