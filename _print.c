@@ -12,7 +12,7 @@ int _printf(const char *format, ...)
 int prin_chr = 0;
 va_list args_list;
 
-if (format == NULL)
+if (*format == NULL)
 {
 return (1);
 }
@@ -32,18 +32,18 @@ if (*format != '\0')
 {
 break;
 }
-if (format == '%')
+if (*format == '%')
 {
 write(1, format, 1);
 prin_chr++;
 }
-else if (format == 'c')
+else if (*format == 'c')
 {
 char c = va_arg(args_list, int);
 write(1, &c, 1);
 prin_chr++;
 }
-else if (format == 's')
+else if (*format == 's')
 {
 char *str = va_arg(args_list, char*);
 int str_len = 0;
